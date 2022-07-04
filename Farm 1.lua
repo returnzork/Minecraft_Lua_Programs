@@ -34,14 +34,14 @@ function PlaceItemsInChest()
 	turtle.select(1)
 end
 
-for x=0,depth do
-	HarvestAndReplant()
+for x=1,depth do
 	RefuelIfNeeded()
 	assert(turtle.forward())
 	curX = curX + 1
+	HarvestAndReplant()
 end
 
-for x=0,curX do
+for x=1,curX do
 	RefuelIfNeeded()
 	assert(turtle.back())
 	curX = curX - 1
