@@ -7,17 +7,24 @@ curX = 0
 curY = 0
 
 function HarvestAndReplant()
-	hasBlock, blockInfo = turtle.nspectDown()
+	hasBlock, blockInfo = turtle.inspectDown()
 	if hasBlock then
 		if blockInfo.tags["minecraft:crops"] ~= nil then
 			if blockInfo.state["age"] == harvestState then
 				turtle.digDown()
-				turtle.select(2)
-				turtle.placeDown()
-				turtle.select(1)
+				PlantItem()
 			end
 		end
+	else
+		turtle.digDown()
+		PlantItem()
 	end
+end
+
+function PlantItem()
+	turtle.select(2)
+	turtle.placeDown()
+	turtle.select(1)
 end
 
 function RefuelIfNeeded()
