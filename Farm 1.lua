@@ -33,8 +33,12 @@ function RefuelIfNeeded()
 	end
 end
 
+
+turtle.select(1)
 function PlaceItemsInChest()
-	for i=2,16 do
+	turtle.select(2)
+	turtle.dropDown(turtle.getItemCount() - 1)
+	for i=3,16 do
 		turtle.select(i)
 		turtle.dropDown()
 	end
