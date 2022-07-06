@@ -1,4 +1,7 @@
+-- Number of tiles per plot
 depth = 16
+-- Number of plots to harvest
+width = 3
 refuelLevel = 10
 
 harvestState = 7
@@ -48,14 +51,23 @@ end
 
 function HarvestRow()
 	for x=1,depth do
-		RefuelIfNeeded()
-		assert(turtle.forward())
-		curX = curX + 1
 		HarvestAndReplant()
+		if x ~= depth then
+			RefuelIfNeeded()
+			assert(turtle.forward())
+			curX = curX + 1
+		end
 	end
 end
 
 function GoHome()
+	turtle.turnLeft()
+	for y=1,curY do
+		RefuelIfNeeded()
+		assert(turtle.forward())
+		curY = curY - 1
+	end
+	turtle.turnRight()
 	for x=1,curX do
 		RefuelIfNeeded()
 		assert(turtle.back())
@@ -63,8 +75,34 @@ function GoHome()
 	end
 end
 
+function MainHarvest()
+	for currentPlot=1,width do
+		HarvestRow()
+		if curX > depth then
+			curX = 1
+		end
+		if currentPlot ~= width then
+			-- if we are on an odd numbered plot, we need to turn right
+			if currentPlot % 2 == 1 then
+				turtle.turnRight()
+				turtle.forward()
+				turtle.forward()
+				turtle.turnRight()
+				curY = curY + 2
+			else
+				turtle.turnLeft()
+				turtle.forward()
+				turtle.turnLeft()
+				curY = curY + 1
+			end
+		end
+	end
+end
+
 function Main()
-	HarvestRow()
+	turtle.forward()
+	curX = curX + 1
+	MainHarvest()
 	GoHome()
 	PlaceItemsInChest()
 end
