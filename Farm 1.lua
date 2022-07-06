@@ -35,7 +35,10 @@ end
 
 function PlaceItemsInChest()
 	turtle.select(2)
-	turtle.dropDown(turtle.getItemCount() - 1)
+	slot2Items = turtle.getItemCount()
+	if slot2Items > 1 then
+		turtle.dropDown(slot2Items - 1)
+	end
 	for i=3,16 do
 		turtle.select(i)
 		turtle.dropDown()
