@@ -61,7 +61,11 @@ function HarvestRow()
 end
 
 function GoHome()
-	turtle.turnLeft()
+	if curY % 2 == 1 then
+		turtle.turnLeft()
+	else
+		turtle.turnRight()
+	end
 	for y=1,curY do
 		RefuelIfNeeded()
 		assert(turtle.forward())
