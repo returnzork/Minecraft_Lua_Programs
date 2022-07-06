@@ -43,20 +43,26 @@ function PlaceItemsInChest()
 	turtle.select(1)
 end
 
-
-function Main()
+function HarvestRow()
 	for x=1,depth do
 		RefuelIfNeeded()
 		assert(turtle.forward())
 		curX = curX + 1
 		HarvestAndReplant()
 	end
+end
 
+function GoHome()
 	for x=1,curX do
 		RefuelIfNeeded()
 		assert(turtle.back())
 		curX = curX - 1
 	end
+end
+
+function Main()
+	HarvestRow()
+	GoHome()
 	PlaceItemsInChest()
 end
 
