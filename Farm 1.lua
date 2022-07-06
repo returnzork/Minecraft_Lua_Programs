@@ -33,8 +33,6 @@ function RefuelIfNeeded()
 	end
 end
 
-
-turtle.select(1)
 function PlaceItemsInChest()
 	turtle.select(2)
 	turtle.dropDown(turtle.getItemCount() - 1)
@@ -45,17 +43,21 @@ function PlaceItemsInChest()
 	turtle.select(1)
 end
 
-for x=1,depth do
-	RefuelIfNeeded()
-	assert(turtle.forward())
-	curX = curX + 1
-	HarvestAndReplant()
+
+function Main()
+	for x=1,depth do
+		RefuelIfNeeded()
+		assert(turtle.forward())
+		curX = curX + 1
+		HarvestAndReplant()
+	end
+
+	for x=1,curX do
+		RefuelIfNeeded()
+		assert(turtle.back())
+		curX = curX - 1
+	end
+	PlaceItemsInChest()
 end
 
-for x=1,curX do
-	RefuelIfNeeded()
-	assert(turtle.back())
-	curX = curX - 1
-end
-
-PlaceItemsInChest()
+Main()
