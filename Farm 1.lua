@@ -32,7 +32,7 @@ end
 
 function RefuelIfNeeded()
 	if turtle.getFuelLevel() < refuelLevel then
-		assert(turtle.refuel())
+		assert(turtle.refuel(1))
 	end
 end
 
