@@ -1,5 +1,5 @@
 while true do
-	if turtle.detect() then
+	if turtle.detect() and turtle.getItemCount() < 64 then
 		turtle.dig()
 	end
 	while not turtle.dropDown() do
